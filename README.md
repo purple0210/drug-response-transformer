@@ -1,70 +1,131 @@
-🚀 How to Run This Project Locally
-1️⃣ Clone the Repository
+# 🚀 How to Run This Project Locally
+
+## 1️⃣ Clone the Repository
+
+```bash
 git clone https://github.com/YOUR_USERNAME/drug-response-transformer.git
 cd drug-response-transformer
+```
 
-2️⃣ Create a Conda Environment (Recommended)
+Replace `YOUR_USERNAME` with your GitHub username.
+
+---
+
+## 2️⃣ Create a Conda Environment (Recommended)
+
+```bash
 conda create -n drug_response python=3.9 -y
 conda activate drug_response
+```
 
-3️⃣ Install Dependencies
+If you don’t use Conda, you can create a virtual environment:
+
+```bash
+python -m venv venv
+venv\Scripts\activate   # Windows
+source venv/bin/activate  # Mac/Linux
+```
+
+---
+
+## 3️⃣ Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
+If installation fails, install manually:
 
-If requirements.txt fails:
-
+```bash
 pip install torch torchvision torchaudio
 pip install numpy pandas scikit-learn matplotlib tqdm fastapi uvicorn
+```
 
-4️⃣ Verify PyTorch Installation
+---
+
+## 4️⃣ Verify PyTorch Installation
+
+```bash
 python -c "import torch; print(torch.__version__)"
+```
 
-🧠 Training the Model
+---
+
+# 🧠 Train the Model
+
+```bash
 python -m src.train
-
+```
 
 This will:
+- Load the dataset
+- Train the multimodal model
+- Save the trained model as `model.pt`
 
-Load dataset
+---
 
-Train the multimodal transformer
+# 📊 Evaluate the Model
 
-Save the trained model as model.pt
-
-📊 Evaluate the Model
+```bash
 python -m src.evaluate
+```
 
-🔍 Interpret Attention
+---
+
+# 🔍 Interpret Attention
+
+```bash
 python -m src.interpret_attention
+```
 
-🚀 Running the API (Local Deployment)
-1️⃣ Start the Server
+---
+
+# 🚀 Run the API Locally (Deployment)
+
+## Start the FastAPI Server
+
+```bash
 uvicorn deployment.app:app --reload
+```
 
+Server will start at:
 
-Server will run at:
-
+```
 http://127.0.0.1:8000
+```
 
-2️⃣ Open Interactive API Docs
+---
 
-Visit:
+## Open Interactive API Documentation
 
+Visit in your browser:
+
+```
 http://127.0.0.1:8000/docs
+```
 
-3️⃣ Example Prediction Request
+---
+
+## Example Prediction Input
+
+```json
 {
   "drug": [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0],
   "rna":  [1.0,0.9,0.8,0.7,0.6,0.5,0.4,0.3,0.2,0.1]
 }
+```
 
-📂 Project Structure
+---
+
+# 📂 Project Structure
+
+```
 DRUG-RESPONSE-TRANSFORMER/
 │
-├── data/                  # Dataset files
-├── deployment/            # FastAPI deployment files
-├── scripts/               # Utility scripts
-├── src/                   # Model and training code
+├── data/                  
+├── deployment/            
+├── scripts/               
+├── src/                   
 │   ├── dataset.py
 │   ├── drug_encoder.py
 │   ├── rna_encoder.py
@@ -73,36 +134,45 @@ DRUG-RESPONSE-TRANSFORMER/
 │   ├── evaluate.py
 │   └── interpret_attention.py
 │
-├── model.pt               # Trained model (generated after training)
+├── model.pt               
 ├── requirements.txt
 └── README.md
+```
 
-⚠️ Common Issues
-❌ ModuleNotFoundError: src
+---
+
+# ⚠️ Common Issues
+
+### ModuleNotFoundError: src
 
 Run using:
 
+```bash
 python -m src.train
-
+```
 
 instead of:
 
+```bash
 python src/train.py
+```
 
-❌ CUDA Errors
+---
 
-If you don’t have GPU:
+### CUDA Error (No GPU)
 
+If running on CPU only:
+
+```python
 torch.load("model.pt", map_location="cpu")
+```
 
-🖥️ System Requirements
+---
 
-Python 3.9+
+# 🖥️ System Requirements
 
-Conda (recommended)
-
-PyTorch
-
-8GB RAM minimum
-
-Optional: NVIDIA GPU (for faster training)
+- Python 3.9+
+- Conda (recommended)
+- PyTorch
+- Minimum 8GB RAM
+- Optional: NVIDIA GPU for faster training
