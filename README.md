@@ -1,3 +1,7 @@
+# 🧬 MultiModal DRUG-RESPONSE-TRANSFORMER 
+
+A Multimodal Deep Learning Model for Predicting Drug Response using Drug Features and RNA Expression Data.
+
 # 🚀 How to Run This Project Locally
 
 ## 1️⃣ Clone the Repository
